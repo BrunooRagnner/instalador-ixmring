@@ -18,8 +18,14 @@ echo "📁 Criando pasta de build..."
 mkdir build && cd build || { echo "❌ Erro ao acessar a pasta build"; exit 1; }
 
 # Compilar o XMRig
-echo "⚙️ Compilando XMRig, isso pode demorar um pouco..."
+echo "⚙️ Compilando o XMRig, isso pode demorar um pouco..."
 cmake .. && make -j$(nproc)
+
+# Solicitar o endereço da carteira e o pool
+echo "🖊️ Insira o seu endereço de carteira Monero (Exemplo: 42fn4du2y9XYxhdM4K3V9hdf2h8wfpYKiUq7oeF16tnwvYoeHgdyTyzFz1zBshYQjpXQ1bE9z2hGq8z7fEJ7kqtQp9zxfWcsHq6Y): "
+read carteira
+echo "🖊️ Insira o endereço do pool (Exemplo: pool.supportxmr.com:3333): "
+read pool
 
 # Criar arquivo de configuração
 echo "🛠️ Criando arquivo de configuração..."
@@ -29,8 +35,8 @@ cat > config.json <<EOL
     "cpu": { "enabled": true, "huge-pages": true, "hw-aes": null, "asm": true, "rx": [0, 1, 2, 3] },
     "pools": [
         {
-            "url": "pool.supportxmr.com:3333",
-            "user": "SUA_CARTEIRA_MONERO",
+            "url": "$pool",
+            "user": "$carteira",
             "pass": "x",
             "keepalive": true,
             "tls": false
@@ -45,3 +51,4 @@ chmod +x xmrig
 # Executar o XMRig
 echo "🚀 Iniciando o XMRig..."
 ./xmrig
+
