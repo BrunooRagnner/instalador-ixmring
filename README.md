@@ -23,8 +23,5 @@ Para usar este script, primeiro clone este repositório:
 git clone https://github.com/BrunooRagnner/instalador-xmrig.git
 cd instalador-xmrig
 chmod +x install_xmrig.sh
-
-#Execute o Script de Instalação
-
 ./install_xmrig.sh
 
